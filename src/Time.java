@@ -1,21 +1,22 @@
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 //This is the class to get the time from the computer
 public class Time {
 	
-	//This variable stores the time as a string.
-	private String time;
+	private Calendar cal1 = Calendar.getInstance(); //The current time.
+	private Calendar cal2 = Calendar.getInstance(); //The times that will be checked.
+	private int[] times = {17, 12, 00};
+	private String[] greeting = {"evening.", "afternoon.", "morning."};
 
-	//This method sets the time to the variable 'time' when called.
-	public void getTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		Calendar cal = Calendar.getInstance();
-		time = dateFormat.format(cal.getTime());
+	public void checkTime() {
+		for (int i = 0; i < 3; i++) {
+			cal2.set(Calendar.HOUR_OF_DAY, times[i]);
+			cal2.set(Calendar.MINUTE, 00);
+			if (cal1.after(cal2)) {
+				System.out.println("Good " + greeting[i]);
+				break;
+			}
+		}
 	}
 	
-	//This method returns the value stored in the variable 'time' when called.
-	public String giveTime() {
-		return time;
-	}
 }
